@@ -1,0 +1,4 @@
+#!/usr/bin/env fish
+
+
+latexmk -pdf -outdir=out Main.tex

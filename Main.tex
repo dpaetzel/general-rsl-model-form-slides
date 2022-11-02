@@ -1,0 +1,159 @@
+\documentclass[uni]{ocbeamer}
+
+
+\title{General RSL model form}
+
+
+\date{2 November 2022}
+\author{\alert{David Pätzel}}
+\institute{University of Augsburg, Germany}
+
+
+\usepackage[british]{babel}
+
+
+\usepackage{csquotes}
+
+
+\usepackage[beamer,customcolors,markings]{hf-tikz}
+
+
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usetikzlibrary{calc}
+% For brace, see https://latexdraw.com/how-to-draw-curly-braces-in-tikz/ .
+\usetikzlibrary{decorations.pathreplacing,calligraphy}
+
+
+\usepackage[copyright]{ccicons}
+
+
+\usepackage{amsfonts}
+
+
+\newcommand{\normal}{\mathcal{N}}
+\newcommand{\const}{\text{const.}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\BB}{\mathbb{B}}
+\newcommand{\TT}{\mathbb{T}}
+\newcommand{\FF}{\mathbb{F}}
+% data
+\newcommand{\DD}{\mathcal{D}}
+\newcommand{\XX}{\mathcal{X}}
+\newcommand{\YY}{\mathcal{Y}}
+% models
+\newcommand{\MM}{\mathcal{M}}
+\newcommand{\ff}{\hat{f}}
+% populations
+\newcommand{\PP}{\mathbb{P}}
+% variational inference
+\newcommand{\LL}{\mathcal{L}}
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\lnpmd}{\ln p(\MM \mid \DD)}
+
+\newcommand{\MAE}{\text{MAE}}
+\newcommand{\XCSF}{\text{XCSF}}
+\newcommand{\BERBL}{\text{BERBL}}
+\newcommand{\lit}{\text{lit.}}
+\newcommand{\modular}{\text{mod.}}
+
+
+\usepackage{marvosym}
+
+
+\newcommand{\shell}{{\footnotesize\color{gray}\syfamily 🐚}}
+\newcommand{\Shell}{{\Huge\syfamily 🐚}}
+\newcommand{\browser}{{\footnotesize\color{gray}\syfamily 🌎}}
+\newcommand{\Browser}{{\Huge\syfamily 🌎}}
+\newcommand{\editor}{{\footnotesize\color{gray}\syfamily 📄}}
+\newcommand{\Editor}{{\Huge\syfamily 📄}}
+
+
+\begin{document}
+
+
+\begin{frame}{General RSL model form}
+  Popular RSLs (e.\,g.\@ XCS, XCSF, UCS, BioHEL, …) build \alert{discriminative function models} of the form
+
+  \vspace{0.3cm}
+
+  % tikzmarkin{a}(below right offset)(above left offset)
+  \begin{equation}
+    \ff_{
+      \hfsetfillcolor{green!10}
+      \hfsetbordercolor{green}
+      \tikzmarkin<2->{MM}(0.03,-0.1)(0,0.3)
+      \MM
+      \tikzmarkend{MM}
+    }(\theta, x) =
+    \sum_{k = 1}^{K}
+    \quad
+    \hfsetfillcolor{green!10}
+    \hfsetbordercolor{green}
+    \tikzmarkin<2->{mk}(0.05,-0.2)(-0.1,0.5)
+    m_{k}(x)
+    \tikzmarkend{mk}
+    \quad
+    \hfsetfillcolor{blue!10}
+    \hfsetbordercolor{blue}
+    \tikzmarkin<2->{gamma}(0.05,-0.2)(-0.1,0.5)
+    \gamma_{k}
+    \tikzmarkend{gamma}
+    \quad
+    \hfsetfillcolor{blue!10}
+    \hfsetbordercolor{blue}
+    \tikzmarkin<2->{ff}(0.05,-0.2)(-0.1,0.5)
+    \ff_{k}(\theta_{k}, x)
+    \tikzmarkend{ff}
+  \end{equation}
+
+  \only<2->{
+    \begin{tikzpicture}[remember picture,overlay]
+      \node (mstruc) at ($(MM) + (-0.7, -1)$) {\color{green}model structure};
+      \node (resp) at ($(mk) + (-0.25, -1.5)$) {\color{green}responsibility};
+      \node (mix) at ($(gamma) + (0.1, -2)$) {\color{blue}mixing weight};
+      \node (subm) at ($(ff) + (1.3, -1.5)$) {\color{blue}submodel};
+
+      \coordinate (mstruc-MM) at ($(MM) + (0.2, -0.4)$);
+      \draw[-stealth,thick,green] (mstruc) -- (mstruc-MM);
+
+      \coordinate (resp-mk) at ($(mk) + (0.5, -0.7)$);
+      \draw[-stealth,thick,green] (resp) -- (resp-mk);
+
+      \coordinate (mix-gamma) at ($(gamma) + (0.25, -0.7)$);
+      \draw[-stealth,thick,blue] (mix) -- (mix-gamma);
+
+      \coordinate (subm-ff) at ($(ff) + (0.75, -0.7)$);
+      \draw[-stealth,thick,blue] (subm) -- (subm-ff);
+
+      % \draw<3->[pen colour={orange},very thick,decorate,decoration={calligraphic brace,amplitude=5pt}] ($(mk) + (-0.05, 0.3)$) --  ($(ff) + (1.5, 0.3)$) node [above=3pt,pos=0.5] {\color{orange}rule $k$};
+    \end{tikzpicture}
+  }
+
+  % Ugly hack to work around uncover/visible/invisible not working with hf-tikz (we have to use only for the tikzpickture and thus everything shifts around).
+  \only<1>{
+    \vspace{1.7cm}
+  }
+
+  \only<2->{
+    \vspace{1.3cm}
+  }
+
+  {
+    \color{gray}
+    where $\theta = \left\{ \left\{ \theta_{k} \right\}_{k=1}^{K}, \left\{ \gamma_{k} \right\}_{k=1}^{K} \right\}$
+    and $\MM = \left\{K, \left\{ m_{k} \right\}_{k=1}^{K} \right\}$.
+  }
+
+  \begin{tikzpicture}[remember picture,overlay]
+    \node [anchor=south] at (current page.south) {
+      \tiny
+      \color{gray}
+      \copyright{} 2022 David Pätzel
+      \ccbync{}
+    };
+  \end{tikzpicture}
+\end{frame}
+
+
+\end{document}
