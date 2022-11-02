@@ -82,7 +82,7 @@
     \ff_{
       \hfsetfillcolor{green!10}
       \hfsetbordercolor{green}
-      \tikzmarkin<2->{MM}(0.03,-0.1)(0,0.3)
+      \tikzmarkin<1->{MM}(0.03,-0.1)(0,0.3)
       \MM
       \tikzmarkend{MM}
     }(\theta, x) =
@@ -90,24 +90,24 @@
     \quad
     \hfsetfillcolor{green!10}
     \hfsetbordercolor{green}
-    \tikzmarkin<2->{mk}(0.05,-0.2)(-0.1,0.5)
+    \tikzmarkin<1->{mk}(0.05,-0.2)(-0.1,0.5)
     m_{k}(x)
     \tikzmarkend{mk}
     \quad
     \hfsetfillcolor{blue!10}
     \hfsetbordercolor{blue}
-    \tikzmarkin<2->{gamma}(0.05,-0.2)(-0.1,0.5)
+    \tikzmarkin<1->{gamma}(0.05,-0.2)(-0.1,0.5)
     \gamma_{k}
     \tikzmarkend{gamma}
     \quad
     \hfsetfillcolor{blue!10}
     \hfsetbordercolor{blue}
-    \tikzmarkin<2->{ff}(0.05,-0.2)(-0.1,0.5)
+    \tikzmarkin<1->{ff}(0.05,-0.2)(-0.1,0.5)
     \ff_{k}(\theta_{k}, x)
     \tikzmarkend{ff}
   \end{equation}
 
-  \only<2->{
+  \only<1->{
     \begin{tikzpicture}[remember picture,overlay]
       \node (mstruc) at ($(MM) + (-0.7, -1)$) {\color{green}model structure};
       \node (resp) at ($(mk) + (-0.25, -1.5)$) {\color{green}responsibility};
@@ -135,7 +135,7 @@
     \vspace{1.7cm}
   }
 
-  \only<2->{
+  \only<1->{
     \vspace{1.3cm}
   }
 
